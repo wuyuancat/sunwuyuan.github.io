@@ -1,1 +1,123 @@
+#你好，这是孙悟元制作的满足大部分使用需求的yun主题配置文件，请查看快速部署网站：yun.wuyuan.dev,其他配置请查看yun.yunyoujun.cn
 
+favicon: /images/logo.ico
+
+social:
+  - name: RSS
+    # set rss in your root config
+    # https://github.com/hexojs/hexo-generator-feed
+    link: /atom.xml # config.feed.path
+    icon: ri:rss-line
+    color: orange
+
+banner:
+  enable: true
+  #请修改为自己的网站名字
+  title: 某某某的小站
+  border: true
+  cloud:
+    enable: true
+    color: white
+  go_down:
+    enable: true
+    icon: ri:arrow-down-s-line
+
+bg_image:
+  enable: true
+  url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0-blur-30px.jpg
+  dark:
+  opacity: 0.8
+
+cursor:
+  enable: false
+  default: https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur
+  pointer: https://cdn.yunyoujun.cn/css/md-cursors/link.cur
+  text: https://cdn.yunyoujun.cn/css/md-cursors/text.cur
+
+avatar:
+  enable: true
+  url: /img.wuyuan.dev/logo.png
+  rounded: true
+  opacity: 1
+  mickey_mouse: false
+  status:
+    enable: true
+    emoji: 😭
+    message: 不想上学
+
+menu:
+  home:
+    path: /
+    icon: ri:home-4-line
+  list:
+    - type: archives
+      path: /archives/
+      icon: ri:archive-line
+    - type: categories
+      path: /categories/
+      icon: ri:folder-2-line
+    - type: tags
+      path: /tags/
+      icon: ri:price-tag-3-line
+    # - path: https://www.yunyoujun.cn
+    #   icon: ri:cloud-line
+    #   count: 你猜
+  custom:
+    title: bilibili
+    path: https://bilibili.com
+    icon: ri:bilibili-line
+
+codeblock:
+  copy_btn: true
+
+creative_commons:
+  license: by-nc-sa
+  post: true
+  language: deed.zh
+  clipboard: false
+
+reward:
+  enable: true
+  icon: ri:hand-coin-line
+  comment: I'm so cute. Please give me money.
+  # url: https://github.com/YunYouJun/yunyoujun.github.io/issues/96
+  methods:
+    - name: 支付宝
+      path: /images/zfb.jpg
+      color: "#00A3EE"
+      icon: ri:alipay-line
+    - name: 微信支付
+      path: /images/wxzf.jpg
+      color: "#2DC100"
+      icon: ri:wechat-pay-line
+
+footer:
+  since: 2022
+  icon:
+    name: ri:cloud-line
+    animated: true
+    color: "#0078E7"
+
+  live_time:
+    enable: false
+    prefix: 本博客已萌萌哒地运行
+    suffix: (●'◡'●)
+    start_time: "2022-01-01T00:00:00"
+say:
+  enable: true
+  api: https://cdn.jsdelivr.net/gh/ElpsyCN/say@gh-pages/sentences.json
+  # https://developer.hitokoto.cn/sentence/
+  hitokoto:
+    enable: true
+    api: https://v1.hitokoto.cn
+mourn:
+  enable: true
+  days:
+    - 4-4
+
+engine_search:
+  enable: false
+local_search:
+  enable: true
+
+baidu_push: true
