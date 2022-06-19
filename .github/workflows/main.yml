@@ -1,10 +1,5 @@
 name: qh-Pages
-on:  
-  push:
-    branches:
-      - main
-
-
+on: workflow_dispatch
 
 jobs:
   deploy:
