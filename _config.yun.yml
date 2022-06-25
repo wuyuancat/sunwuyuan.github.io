@@ -59,7 +59,7 @@ social:
     
 notice:
   enable: true
-  content:<a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"><span class="site-author-status" title="不想上学">😭</span></a>
+  content: <a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"><span class="site-author-status" title="不想上学">😭</span></a>
     
    
 banner:
