@@ -163,3 +163,10 @@ local_search:
   enable: true
 
 baidu_push: true
+
+head:
+  css:
+    example: https://code.getmdl.io/1.3.0/material.blue-light_blue.min.css
+  js:
+    base:
+      - https://code.getmdl.io/1.3.0/material.min.js
