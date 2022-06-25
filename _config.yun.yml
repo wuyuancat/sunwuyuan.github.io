@@ -59,7 +59,7 @@ social:
     
 notice:
   enable: true
-  content: <div style="text-align: center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><span class="site-name">孙悟元</span></div> 
+  content: <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><span class="site-name">孙悟元</span></div>
    
 banner:
   enable: true
