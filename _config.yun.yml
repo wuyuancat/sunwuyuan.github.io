@@ -59,7 +59,15 @@ social:
     
 notice:
   enable: true
-  content: <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><br/><span class="site-name">孙悟元</span></div>
+  content: <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><br/><span class="site-name">孙悟元</span><br/>    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://status.wuyuan.dev/'">
+        状态
+    </button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://tools.wuyuan.dev/'">
+        工具
+    </button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://wuyuan.dev/about/'">
+        关于
+    </button></div>
    
 banner:
   enable: true
