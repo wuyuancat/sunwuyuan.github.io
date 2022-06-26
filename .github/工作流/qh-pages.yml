@@ -1,0 +1,38 @@
+name: qh-Pages
+on:
+push:
+branches:
+- main
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v2
+# with:
+# submodules: true
+
+- name: Setup Node
+uses: actions/setup-node@v3.2.0
+with:
+node-version: 16.x
+
+- name: hexo
+run: npm install ; npm install hexo-cli -g ; npm install hexo-theme-yun@latest ; npm install hexo-render-pug hexo-renderer-stylus hexo-generator-searchdb hexo-generator-category; hexo new page categories ; hexo new page about ; hexo new page links ;
+ hexo generate
+
+- name: Deploy
+uses: peaceiris/actions-gh-pages@v3
+with:
+github_token: ${{ secrets.GITHUB_TOKEN }}
+publish_dir: ./public
+publish_branch: pages
+force_orphan: true
+
+- name: Deploy2
+uses: peaceiris/actions-gh-pages@v3
+with:
+github_token: ${{ secrets.GITHUB_TOKEN }}
+publish_dir: ./
+publish_branch: amain
+force_orphan: true
