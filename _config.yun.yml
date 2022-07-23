@@ -1,0 +1,172 @@
+favicon: https://img.wuyuan.dev/tx.jpg
+
+# _config.yun.yml
+medium_zoom: true
+
+scrollreveal:
+  enable: true
+  targets:
+    - .post-card
+    - .markdown-body img
+    
+    
+waline:
+  enable: true
+  serverURL: https://wuyuan-waline.vercel.app/
+  # visitor: true
+  comment: true
+
+cursor:
+  enable: false
+  default: https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur
+  pointer: https://cdn.yunyoujun.cn/css/md-cursors/link.cur
+  text: https://cdn.yunyoujun.cn/css/md-cursors/text.cur
+
+fireworks:
+  enable: true
+  colors:
+    - '102, 167, 221'
+    - '62, 131, 225'
+    - '33, 78, 194'
+
+social:
+  - name: RSS
+    # set rss in your root config
+    # https://github.com/hexojs/hexo-generator-feed
+    link: /atom.xml # config.feed.path
+    icon: ri:rss-line
+    color: orange
+  - name: GitHub
+    link: https://github.com/sunwuyuan
+    icon: ri:github-line
+    color: '#181717'
+  - name: E-Mail
+    link: mailto:sun@wuyuan.dev
+    icon: ri:mail-line
+    color: '#8E71C1'
+  - name: 微博
+    link: https://weibo.com/wuyuankeji
+    icon: ri:weibo-line
+    color: '#E6162D'
+  - name: 知乎
+    link: https://www.zhihu.com/people/sunwuyuan
+    icon: ri:zhihu-line
+    color: '#0084FF'
+  - name: 哔哩哔哩动画
+    link: https://space.bilibili.com/661404066
+    icon: ri:bilibili-line
+    color: '#FF8EB3'
+    
+notice:
+  enable: true
+  content: <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><br/><span class="site-name">孙悟元</span><br/>    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://status.wuyuan.dev/'">
+        状态
+    </button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://tools.wuyuan.dev/'">
+        工具
+    </button>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://wuyuan.dev/about/'">
+        关于
+    </button></div><br/><br/>
+   
+banner:
+  enable: true
+  #请修改为自己的网站名字
+  title: 孙悟元的小站
+  border: true
+  cloud:
+    enable: true
+    color: white
+  go_down:
+    enable: true
+    icon: ri:arrow-down-s-line
+
+
+
+avatar:
+  enable: true
+  url: https://img.wuyuan.dev/tx.jpg
+  rounded: true
+  opacity: 1
+  mickey_mouse: false
+  status:
+    enable: true
+    emoji: 😭
+    message: 不想上学
+
+menu:
+  home:
+    path: /
+    icon: ri:home-4-line
+  list:
+    - type: archives
+      path: /archives/
+      icon: ri:archive-line
+    - type: categories
+      path: /categories/
+      icon: ri:folder-2-line
+    - type: tags
+      path: /tags/
+      icon: ri:price-tag-3-line
+
+  custom:
+    title: bilibili
+    path: https://bilibili.com
+    icon: ri:bilibili-line
+
+codeblock:
+  copy_btn: true
+
+creative_commons:
+  license: by-nc-sa
+  post: true
+  language: deed.zh
+  clipboard: false
+
+reward:
+  enable: true
+  icon: ri:hand-coin-line
+  comment: I'm so cute. Please give me money.
+  # url: https://github.com/YunYouJun/yunyoujun.github.io/issues/96
+  methods:
+    - name: 微信支付
+      path: https://img.wuyuan.dev/wxzf.png
+      color: "#2DC100"
+      icon: ri:wechat-pay-line
+
+footer:
+  since: 2022
+  icon:
+    name: ri:cloud-line
+    animated: true
+    color: "#0078E7"
+
+  live_time:
+    enable: false
+    prefix: 本博客已萌萌哒地运行
+    suffix: (●'◡'●)
+    start_time: "2022-01-01T00:00:00"
+say:
+  enable: true
+  api: https://cdn.jsdelivr.net/gh/ElpsyCN/say@gh-pages/sentences.json
+  # https://developer.hitokoto.cn/sentence/
+  hitokoto:
+    enable: true
+    api: https://v1.hitokoto.cn
+
+mourn:
+  enable: true
+  days:
+    - 4-4
+
+local_search:
+  enable: true
+
+baidu_push: true
+
+head:
+  css:
+    example: https://code.getmdl.io/1.3.0/material.blue-light_blue.min.css
+  js:
+    base:
+      - https://code.getmdl.io/1.3.0/material.min.js
