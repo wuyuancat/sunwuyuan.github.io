@@ -174,3 +174,6 @@ pages:
     url: /links/
     icon: ri:genderless-line
     color: dodgerblue
+
+wordcloud:
+  enable: true
