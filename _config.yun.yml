@@ -1,4 +1,4 @@
-favicon: https://img.wuyuan.dev/tx.jpg
+favicon: https://cdn.wuyuan.dev/sitelogo.png
 
 # _config.yun.yml
 medium_zoom: true
@@ -8,8 +8,7 @@ scrollreveal:
   targets:
     - .post-card
     - .markdown-body img
-    
-    
+
 waline:
   enable: true
   serverURL: https://wuyuan-waline.vercel.app/
@@ -25,9 +24,9 @@ cursor:
 fireworks:
   enable: true
   colors:
-    - '102, 167, 221'
-    - '62, 131, 225'
-    - '33, 78, 194'
+    - "102, 167, 221"
+    - "62, 131, 225"
+    - "33, 78, 194"
 
 social:
   - name: RSS
@@ -39,36 +38,37 @@ social:
   - name: GitHub
     link: https://github.com/sunwuyuan
     icon: ri:github-line
-    color: '#181717'
+    color: "#181717"
   - name: E-Mail
     link: mailto:sun@wuyuan.dev
     icon: ri:mail-line
-    color: '#8E71C1'
+    color: "#8E71C1"
   - name: 微博
     link: https://weibo.com/wuyuankeji
     icon: ri:weibo-line
-    color: '#E6162D'
+    color: "#E6162D"
   - name: 知乎
     link: https://www.zhihu.com/people/sunwuyuan
     icon: ri:zhihu-line
-    color: '#0084FF'
+    color: "#0084FF"
   - name: 哔哩哔哩动画
     link: https://space.bilibili.com/661404066
     icon: ri:bilibili-line
-    color: '#FF8EB3'
-    
+    color: "#FF8EB3"
+
 notice:
   enable: true
-  content: <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://img.wuyuan.dev/tx.jpg" alt="孙悟元"></a><br/><span class="site-name">孙悟元</span><br/>    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://status.wuyuan.dev/'">
-        状态
+  content:
+    <div style="text-align:center"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://cdn.wuyuan.dev/sitelogo.png" alt="孙悟元"></a><br/><span class="site-name">孙悟元</span><br/>    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://status.wuyuan.dev/'">
+    状态
     </button>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://tools.wuyuan.dev/'">
-        工具
+    工具
     </button>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="window.location.href = 'https://wuyuan.dev/about/'">
-        关于
-    </button></div><br/><br/>
-   
+    关于
+    </button></div>
+
 banner:
   enable: true
   #请修改为自己的网站名字
@@ -81,11 +81,9 @@ banner:
     enable: true
     icon: ri:arrow-down-s-line
 
-
-
 avatar:
   enable: true
-  url: https://img.wuyuan.dev/tx.jpg
+  url: https://cdn.wuyuan.dev/sitelogo.png
   rounded: true
   opacity: 1
   mickey_mouse: false
@@ -170,3 +168,9 @@ head:
   js:
     base:
       - https://code.getmdl.io/1.3.0/material.min.js
+
+pages:
+  - name: 我的小伙伴们
+    url: /links/
+    icon: ri:genderless-line
+    color: dodgerblue
