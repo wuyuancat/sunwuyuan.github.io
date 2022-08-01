@@ -8,7 +8,6 @@ tags:
 title: 2022,小图灵是这样崩的
 updated: '2022-08-01 14:28:47'
 ---
-
 # 2022,小图灵是这样崩的
 
 
@@ -29,17 +28,17 @@ updated: '2022-08-01 14:28:47'
 
 
 ## 全是unicode惹的祸
->统一码（Unicode），也叫万国码、单一码，是计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。
+> 统一码（Unicode），也叫万国码、单一码，是计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。
 
 而unicode中有一些控制字符
 
 比如`RLO控制字符`是一个不可见字符，可以对文件名进行伪装。
 
->ROL控制字符是一段代码:_&nbsp。ROL“ROLStartofright-to-leftoverride”,即文字从右往左排列
+> ROL控制字符是一段代码:_&nbsp。ROL“ROLStartofright-to-leftoverride”,即文字从右往左排列
 
 说白了就是这个字符后面的文字反过来，比如`tab.jpg`加上RLO控制字符后变成`gpj.bat`
->这个东西可以在vscode里会被高亮,大概是这样的：
-><table><tr><td bgcolor=red>[U+202E]</td></tr></table>
+> 这个东西可以在vscode里会被高亮,大概是这样的：
+> <table><tr><td bgcolor=red>[U+202E]</td></tr></table>
 
 
 而这次攻击的链接是`https://steam.nosdn.127.net/gnp.83c36d806dc92327b9e7049a565c.svg?`(不要打开！！！)
@@ -59,8 +58,10 @@ updated: '2022-08-01 14:28:47'
 
 <details>
   <summary>先来看看这张图的源代码</summary>
-  
-    <\svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    
+    
+        <\svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <\g id="lol0">
         <\defs>
@@ -751,6 +752,8 @@ updated: '2022-08-01 14:28:47'
         <\use x="5.791657251197202" y="57.56619697329013" xlink:href="#lol30" />
     <\/g>
     <\/svg>
+    
+    
 </details>
 
 为了以防万一，所有`<`我都转义了一下  O(∩_∩)O
@@ -768,4 +771,3 @@ updated: '2022-08-01 14:28:47'
 ## 对小图灵的话
 
 小图灵的开发者们：摸鱼一时爽，摸完要遭殃，记得写篇技术还债
-
