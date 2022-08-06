@@ -16,7 +16,7 @@ waline:
   comment: true
 
 cursor:
-  enable: false
+  enable: true
   default: https://cdn.yunyoujun.cn/css/md-cursors/pointer.cur
   pointer: https://cdn.yunyoujun.cn/css/md-cursors/link.cur
   text: https://cdn.yunyoujun.cn/css/md-cursors/text.cur
