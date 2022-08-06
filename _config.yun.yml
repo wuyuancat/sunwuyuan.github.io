@@ -119,12 +119,12 @@ creative_commons:
   license: by-nc-sa
   post: true
   language: deed.zh
-  clipboard: false
+  clipboard: true
 
 reward:
   enable: true
   icon: ri:hand-coin-line
-  comment: I'm so cute. Please give me money.
+  comment: 打赏
   # url: https://github.com/YunYouJun/yunyoujun.github.io/issues/96
   methods:
     - name: 微信支付
@@ -145,7 +145,7 @@ footer:
     suffix: (●'◡'●)
     start_time: "2022-01-01T00:00:00"
 
-  custom_text: 使用本站视为同意 <a href="https://wuyuan.dev/privacy-policy/" rel="noopener" target="_blank">隐私政策</a>
+  custom_text: <br/>使用本站视为同意 <a href="https://wuyuan.dev/privacy-policy/" rel="noopener" target="_blank">隐私政策</a>
 
 say:
   enable: true
@@ -180,4 +180,5 @@ pages:
 
 wordcloud:
   enable: true
+
 
