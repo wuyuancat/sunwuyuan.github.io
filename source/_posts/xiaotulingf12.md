@@ -8,6 +8,7 @@ tags:
 - 小技巧
 title: 小图灵禁用开发者工具与解决方法
 updated: '2022-08-11 13:38:06'
+author: 孙悟元
 ---
 最近我已经写了三篇小图灵的文章了~~感谢~~小图灵让我有了~~水文~~的正当理由
 
@@ -70,8 +71,7 @@ updated: '2022-08-11 13:38:06'
 顺便说一下，禁用开发者工具可以引用用下面这个js，专业的多。
 
 ```
-<script disable-devtool-auto src='http://cdm.wuyuan.dev/js/disable-devtool/main.js'></script>
+<script disable-devtool-auto src='http://cdn.wuyuan.dev/js/disable-devtool/main.js'></script>
 
 ```
 
-<script disable-devtool-auto src='http://cdm.wuyuan.dev/js/disable-devtool/main.js'></script>
