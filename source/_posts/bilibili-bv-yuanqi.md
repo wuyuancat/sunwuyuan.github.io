@@ -8,7 +8,7 @@ tags:
 categories:
   - 网站
 type: bilibili
-url: https://www.yuque.com/yunyoujun/blog/quaternion-and-spatial-rotation
+url: https://bilibili.com/video/BV1EG4y1z7WF
 ---
 
 自己开发一个网站起始页 [元启](https://yuanqi.wuyuan.dev)
