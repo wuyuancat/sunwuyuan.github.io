@@ -11,7 +11,7 @@ scrollreveal:
 
 waline:
   enable: true
-  serverURL: https://wuyuan-waline.vercel.app/
+  serverURL: https://blog-waline-service.wuyuan.dev/
   # visitor: true
   comment: true
 
