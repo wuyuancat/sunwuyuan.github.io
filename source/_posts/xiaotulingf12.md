@@ -1,4 +1,6 @@
 ---
+abbrlink: ''
+author: 孙悟元
 categories:
 - 小图灵
 date: '2022-08-11 13:38:05'
@@ -7,12 +9,11 @@ tags:
 - 技术
 - 小技巧
 title: 小图灵禁用开发者工具与解决方法
-updated: '2022-08-11 13:38:06'
-author: 孙悟元
+updated: '2022-10-04 09:41:11'
 ---
 最近我已经写了三篇小图灵的文章了~~感谢~~小图灵让我有了~~水文~~的正当理由
 
-# 小图灵的新动作
+## 小图灵的新动作
 
 昨天晚上(2022.8.10)，***qqcd***给我发了条消息，说小图灵把F12禁了
 
@@ -75,4 +76,3 @@ author: 孙悟元
 <script disable-devtool-auto src='http://cdn.wuyuan.dev/js/disable-devtool/main.js'></script>
 
 ```
-
