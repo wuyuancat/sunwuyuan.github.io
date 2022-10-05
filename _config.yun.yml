@@ -181,4 +181,6 @@ pages:
 wordcloud:
   enable: true
 
-
+google_analytics:
+  enable: true
+  id: G-91PD6T5RP9
