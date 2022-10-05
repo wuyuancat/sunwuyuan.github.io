@@ -178,8 +178,7 @@ pages:
     icon: ri:genderless-line
     color: dodgerblue
 
-wordcloud:
-  enable: true
+
 
 google_analytics:
   enable: true
