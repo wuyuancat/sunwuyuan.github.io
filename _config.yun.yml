@@ -171,6 +171,7 @@ head:
   js:
     base:
       - https://code.getmdl.io/1.3.0/material.min.js
+      - https://cdn.wuyuan.dev/js/iframeResizer.contentWindow.min.js
 
 pages:
   - name: 我的小伙伴们
