@@ -145,7 +145,7 @@ footer:
     suffix: (●'◡'●)
     start_time: "2022-01-01T00:00:00"
 
-  custom_text: <br/>使用本站视为同意 <a href="https://wuyuan.dev/privacy-policy/" rel="noopener" target="_blank">隐私政策</a><br/><a href="https://icp.gov.moe/?keyword=20220591" target="_blank">萌ICP备20220591号</a>
+  custom_text: <br/>使用本站视为同意 <a href="https://wuyuan.dev/privacy-policy/" rel="noopener" target="_blank">隐私政策</a><br/><br/><a href="https://icp.gov.moe/?keyword=20220591" target="_blank">萌ICP备20220591号</a>
 
 say:
   enable: true
